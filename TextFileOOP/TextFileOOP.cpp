@@ -12,6 +12,7 @@ int main() {
 	file.get_data();
 	file1.get_data();
 	file.sort(0);
+	file1.show_data();
 	std::cout << std::endl; 
 	file.show_data();
 	std::cout << std::endl;

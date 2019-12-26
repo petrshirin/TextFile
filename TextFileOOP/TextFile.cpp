@@ -9,16 +9,15 @@ TextFile::TextFile()
 
 bool compare_arrs(int* arr1, int* arr2, int len1, int len2) {
 	int len;
-	bool is_same = true;
 	if (len1 < len2)
 		len = len1;
 	else
 		len = len2;
 	for (int i = 0; i < len; i++) {
 		if (arr1[i] != arr2[i])
-			return !is_same;
+			return false;
 	}
-	return is_same;
+	return true;
 }
 
 TextFile::TextFile(std::string path, int _type)
@@ -84,6 +83,8 @@ std::vector <int*> TextFile::quicksort(std::vector <int*> mas, int first, int la
 {
 	int mid;
 	std::vector <int*> count;
+	if (data_arr.size() == 0)
+		return mas;
 	count.push_back(data_arr[0]);
 	count[0] = new int[count_fields];
 	int f = first, l = last;
@@ -162,11 +163,16 @@ void TextFile::make_file(std::string new_path, TextFile& other, bool unic) {
 	int j = 1;
 	int i = 0;
 	bool is_same;
-	while (i != new_file.data_arr.size() - 2){
+	while (i != new_file.data_arr.size()){
 		j = 1;
 		is_same = false;
-		if (i + j == new_file.data_arr.size())
+		if (i + j >= new_file.data_arr.size()) {
+			if((!compare_arrs(new_file.data_arr[i], new_file.data_arr[i - 1],
+				count_fields, count_fields)) && (!unic))
+				new_file.data_arr.erase(new_file.data_arr.begin() + i);
 			break;
+		}
+			
 		while (compare_arrs(new_file.data_arr[i], new_file.data_arr[i + j],
 			count_fields, count_fields)) {
 			j++;
@@ -175,45 +181,22 @@ void TextFile::make_file(std::string new_path, TextFile& other, bool unic) {
 				j--;
 				break;
 			}
-				
-
 		}
 
 		if ((unic) && (is_same)) {
 			for (j; j > 0; j--) {
 				new_file.data_arr.erase(new_file.data_arr.begin() + i);
 			}
+			i--;
 		}
-		else
-			if (j == 1) {
+		if ((!unic) && (!is_same)) {
 				new_file.data_arr.erase(new_file.data_arr.begin() + i);
+				i--;
 			}
 		i++;
 	}
 	new_file.sort(0);
 	new_file.write_file();
-	//bool unic_row = true;
-	//for (int i = 0; i < data_arr.size(); i++) {
-	//	for (int j = 0; j < other.data_arr.size(); j++) {
-	//		if (data_arr[i][0] <= other.data_arr[j][0]) {
-	//			if (compare_arrs(data_arr[i], data_arr[j], count_fields, other.count_fields)) {
-	//				unic_row = false;
-	//				break;
-	//			}
-	//				
-
-	//		}
-	//		else
-	//			break;
-	//	}
-	//	if (unic) {
-	//		if (unic_row)
-	//			new_file.data_arr.push_back(data_arr[i]);
-	//	}
-	//	else
-	//		if (!unic_row)
-	//			new_file.data_arr.push_back(data_arr[i]);
-	//}
 }
 
 void TextFile::copy_data(std::string file_path_to) {
