@@ -1,0 +1,7 @@
+﻿  TextFile.cpp
+c:\users\admin\source\repos\textfileoop\textfileoop\textfile.cpp(52): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\admin\source\repos\textfileoop\textfileoop\textfile.cpp(115): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\admin\source\repos\textfileoop\textfileoop\textfile.cpp(126): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\admin\source\repos\textfileoop\textfileoop\textfile.cpp(159): warning C4018: <: несоответствие типов со знаком и без знака
+c:\users\admin\source\repos\textfileoop\textfileoop\textfile.cpp(221): warning C4018: <: несоответствие типов со знаком и без знака
+  TextFileOOP.vcxproj -> C:\Users\Admin\source\repos\TextFileOOP\Debug\TextFileOOP.exe
